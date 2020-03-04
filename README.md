@@ -10,12 +10,14 @@ Communautary Elections Software
 
 ```
 /!\
-You may need to disable your Anti-Virus there is no certificates on the realese Version so he detect it like a Virus
+You may need to disable your Anti-Virus there is no certificates
+on the realese Version so he detect it like a Virus
 
 Create a Folder C:/temp
 Create a Folder C:/ScreenShot
 
-these Folder are require respectivly to Comunicate with the front office / make a save of the current state
+these Folder are require respectivly to :
+Comunicate with the front office / make a save of the current state
 ```
 
 ## Back :
