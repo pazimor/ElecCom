@@ -1,0 +1,81 @@
+﻿<Window x:Class="ElectionComunautaire.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ElectionComunautaire"
+        mc:Ignorable="d"
+        Title="Back Office" Height="450" Width="800">
+
+    <Grid Height="auto" Width="auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*" MinWidth="200"/>
+            <ColumnDefinition Width="0.2*" MinWidth="200"/>
+            <ColumnDefinition Width="0.2*" MinWidth="130"/>
+            <ColumnDefinition Width="0.2*" MinWidth="100"/>
+            <ColumnDefinition Width="0.2*" MinWidth="70"/>
+            <ColumnDefinition Width="0.2*" MinWidth="70"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.03*" MinHeight="30"/>
+            <RowDefinition Height="0.03*" MinHeight="30"/>
+            <RowDefinition Height="*" MinHeight="50"/>
+            <RowDefinition Height="0.03*" MinHeight="30"/>
+            <RowDefinition Height="0.03*" MinHeight="30"/>
+        </Grid.RowDefinitions>
+
+        
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="Nombre de bulletins trouvés dans l'urne :" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Margin="5,5,5,5" x:Name="Nbr_buletin" MinWidth="100" KeyDown="Nbr_buletin_KeyDown" Text="0"/>
+            <Button Content="-->" Margin="5,5,5,5" Click="validate_Nbr_buletin" MinWidth="30"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="Nom du candidat :" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Margin="5,5,5,5" x:Name="name_ppl" MinWidth="100" KeyDown="KeyPressed"/>
+            <Button Content="+" Margin="5,5" Click="Add_personne" MinWidth="20"/>
+            <ComboBox Width="120" Margin="5, 5" x:Name="fileparsed"/>
+            <Button Content="..." Margin="5,5" Click="set_File" MinWidth="20"/>
+            <Label Content="Fichier sélectionné" x:Name="fileTitle"/>
+        </StackPanel>
+        
+        <ScrollViewer Grid.ColumnSpan="8" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <StackPanel x:Name="PeopleContainer"/>
+        </ScrollViewer>
+        <Button Content="Capture" Grid.Column="4" Margin="5, 5, 5, 5" Click="screenshot" MinWidth="50"/>
+        <Button Content="R-A-Z" Grid.Column="5" Margin="5, 5, 5, 5" Click="RAZ" MinWidth="50"/>
+        <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Majorité :" FontSize="15" VerticalAlignment="Center"/>
+            <Label Content="0" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="majo" FontSize="15"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="4"  Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Suffrages exprimés :" FontSize="15" VerticalAlignment="Center"/>
+            <Label Content="0" HorizontalAlignment="Center" x:Name="sufrage" FontSize="15"/>
+        </StackPanel>
+
+        <ComboBox x:Name="step" Grid.Column="2" Grid.Row="0" Margin="5,5,5,5" MinWidth="120" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="step_SelectionChanged" SelectedIndex="0">
+            <ComboBoxItem Content="Sélectionner" HorizontalAlignment="Center"/>
+            <ComboBoxItem Content="élection du Président"/>
+            <ComboBoxItem Content="élection du 1er Vice Président"/>
+            <ComboBoxItem Content="élection du 2nd Vice Président"/>
+            <ComboBoxItem Content="élection du 3ème Vice Président"/>
+            <ComboBoxItem Content="élection du 4ème Vice Président"/>
+            <ComboBoxItem Content="élection du 5ème Vice Président"/>
+            <ComboBoxItem Content="élection du 6ème Vice Président"/>
+            <ComboBoxItem Content="élection du 7ème Vice Président"/>
+            <ComboBoxItem Content="élection du 8ème Vice Président"/>
+            <ComboBoxItem Content="élection du 9ème Vice Président"/>
+            <ComboBoxItem Content="élection du 10ème Vice Président"/>
+        </ComboBox>
+        <ComboBox x:Name="round" Grid.Column="3"  Grid.Row="0" Margin="5,5,5,5" MinWidth="60" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="step_SelectionChanged" SelectedIndex="0">
+            <ComboBoxItem Content="Sélectionner" HorizontalAlignment="Center"/>
+            <ComboBoxItem Content="1er Tour"/>
+            <ComboBoxItem Content="2ème Tour"/>
+            <ComboBoxItem Content="3ème Tour"/>
+
+        </ComboBox>
+        <Grid  Grid.Column="0" Grid.ColumnSpan="6"  Grid.Row="3" x:Name="vnull"/>
+        <Grid  Grid.Column="0" Grid.ColumnSpan="6"  Grid.Row="4" x:Name="vblank"/>
+    </Grid>
+</Window>

@@ -1,0 +1,22 @@
+﻿<Window x:Class="ElectionComunautaire.confirmation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ElectionComunautaire"
+        mc:Ignorable="d"
+        Title="confirmation" Height="300" Width="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="etes vous sur vouloir faire ca ?" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
+        <Button Content="¯\__(ツ)__/¯" FontSize="25" Margin="30,30,30,30" Grid.Column="0" Grid.Row="1"/>
+        <Button Content="NON" FontSize="25" Margin="30,30,30,30" Grid.Column="1" Grid.Row="1"/>
+    </Grid>
+</Window>
