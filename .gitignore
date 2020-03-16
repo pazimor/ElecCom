@@ -5,4 +5,3 @@ interface\ graphique ELCOM/\.vs/*
 *.pdb
 *Debug*
 *Release*
-*.dll
