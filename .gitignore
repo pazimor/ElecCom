@@ -2,9 +2,7 @@
 ElectionComunautaire/\.vs/*
 interface\ graphique ELCOM/\.vs/*
 
-*.vcxproj
 *.pdb
-*.filters
 *Debug*
 *Release*
 *.dll
