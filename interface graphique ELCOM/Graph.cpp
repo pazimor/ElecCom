@@ -92,7 +92,7 @@ bool Graph::setupSR()
 	W_NbEnveloppe.setFillColor(sf::Color(135, 16, 67));
 	sf::FloatRect WenveloppeSize = W_NbEnveloppe.getGlobalBounds();
 	W_NbEnveloppe.setOrigin(WenveloppeSize.width, 0);
-	W_NbEnveloppe.setPosition(Height - 100, Width - (Width / 4.f) + 70);
+	W_NbEnveloppe.setPosition(Height - 75, Width - (Width / 4.f) + 70);
 
 	W_nbNull.setFont(Defaultfont);
 	W_nbNull.setString("Nombre de bulletins blancs 00");
@@ -154,11 +154,17 @@ void Graph::update()
 	//draw word
 	sf::FloatRect WstepSize = W_Steps.getGlobalBounds();
 	W_Steps.setOrigin(WstepSize.width / 2.f, WstepSize.height / 2.f);
-	W_Steps.setString(data[0] - 1 >= 0 ? _Ssteps.at(data[0] - 1) : " ");
+	if (data[0] - 1 > _Ssteps.size())
+		W_Steps.setString(_Ssteps.at(_Ssteps.size()- 1));
+	else
+		W_Steps.setString(data[0] - 1 >= 0 ? _Ssteps.at(data[0] - 1) : " ");
 	win->draw(W_Steps);
 
 	sf::FloatRect WRoundSize = W_Rounds.getGlobalBounds();
 	W_Rounds.setOrigin(WRoundSize.width / 2.f, WRoundSize.height / 2.f);
+	if (data[0] - 1 > _Srounds.size())
+		W_Steps.setString(_Srounds.at(_Srounds.size() - 1));
+	else
 	W_Rounds.setString(data[1] - 1 >= 0 ? _Srounds.at(data[1] - 1) : " ");
 	win->draw(W_Rounds);
 

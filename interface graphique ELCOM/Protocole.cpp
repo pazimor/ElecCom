@@ -56,8 +56,11 @@ void Protocole::update()
 	while (token != NULL) {
 		if (i < 3 && first)
 		{
-			files.push_back(readFile(token));
-			//path
+			auto tmp = readFile(token);
+			if (tmp.c_str() != NULL)
+				files.push_back(tmp);
+			else
+				files.push_back("NONE");
 		}
 		if (i >= 3 && i < 5)
 		{
