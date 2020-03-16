@@ -35,6 +35,10 @@ namespace ElectionComunautaire
         const string Blank = "Votes blancs";
         const string Nulle = "Votes nuls";
 
+        private string F_ppl;
+        private string F_steps;
+        private string F_round;
+
         // initialisation de debut
         public MainWindow()
         {
@@ -61,29 +65,37 @@ namespace ElectionComunautaire
                 string[] protocole = text.Split(';');
 
                 // recupere le fichier et re atribut tout comme sa doit etre
-                step.SelectedIndex = int.Parse(protocole[0]);
-                round.SelectedIndex = int.Parse(protocole[1]);
-                var nb_ppl = int.Parse(protocole[2]);
+                F_steps = protocole[0];
+                F_round = protocole[1];
+                F_ppl = protocole[2];
+                openBack();
+
+                step.SelectedIndex = int.Parse(protocole[3]);
+                round.SelectedIndex = int.Parse(protocole[4]);
+                var nb_ppl = int.Parse(protocole[5]);
+
+                nbr_buletinI = int.Parse(protocole[6]);
+
+                
+                Vblank.nbVotesI = int.Parse(protocole[7]);
+                Vblank.nbVotes.Text = protocole[7];
+                
+                Vnull.nbVotesI = int.Parse(protocole[8]);
+                Vnull.nbVotes.Text = protocole[8];
+
+                majo.Content = int.Parse(protocole[10]);
 
                 for (int i = 0; i < nb_ppl; i++)
                 {
                     int isodd = People.Count() % 2;
-                    var tmp = new Page1(protocole[i * 3 + 3], this, isodd == 0 ? true : false, false, true);
-                    tmp.percent.Text = protocole[i * 3 + 4];
-                    tmp.nbVotesI = int.Parse(protocole[i * 3 + 5]);
-                    tmp.nbVotes.Text = protocole[i * 3 + 5];
+                    var tmp = new Page1(protocole[i * 3 + 10], this, isodd == 0 ? true : false, false, true);
+                    tmp.percent.Text = protocole[i * 3 + 11];
+                    tmp.nbVotesI = int.Parse(protocole[i * 3 + 12]);
+                    tmp.nbVotes.Text = protocole[i * 3 + 12];
                     People.Add(tmp);
                     PeopleContainer.Children.Add(People[People.Count - 1]);
                 }
-                nbr_buletinI = int.Parse(protocole[nb_ppl * 3 + 3]);
-
-                //!\\ attention les votes null et blank serons fusionner
-                Vblank.nbVotesI = int.Parse(protocole[nb_ppl * 3 + 4]);
-                Vblank.nbVotes.Text = protocole[nb_ppl * 3 + 4];
-                //Vnull.nbVotesI = int.Parse(protocole[nb_ppl * 3 + 5]);
-                majo.Content = int.Parse(protocole[nb_ppl * 3 + 6]);
-
-                // update du protocole / envoy sur l'autre program
+                // update du protocole / Fix Possible mistakes
                 update(@"c:\temp\IPC.ipc");
             }
             catch {
@@ -257,7 +269,7 @@ namespace ElectionComunautaire
             sufrage.Content = TotalVotes.ToString();
 
             //generation du protocole
-            string protocole = " " + ";" + " " + ";" + " " + ";" + step.SelectedIndex.ToString() + ";" + round.SelectedIndex.ToString() + ";" +
+            string protocole = F_steps + ";" + F_round + ";" + F_ppl + ";" + step.SelectedIndex.ToString() + ";" + round.SelectedIndex.ToString() + ";" +
                                People.Count.ToString() + ";";
 
             //generation du protocole (envoye des personnes)
@@ -326,13 +338,84 @@ namespace ElectionComunautaire
                 return;
 
             fileparsed.Items.Clear();
-            fileparsed.Items.Add("- select someone -");
+            fileparsed.Items.Add("- Select -");
             foreach (string file in allLines)
             {
                 fileparsed.Items.Add(file);
             }
-            string[] data = openFileDialog.FileName.Split('\\');
-            //fileTitle.Content = data[data.Length - 1];
+            F_ppl = openFileDialog.FileName;
+        }
+
+        // parametrage du fichier des etapes
+        private void set_step_File(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            string[] allLines;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                allLines = File.ReadAllLines(openFileDialog.FileName);
+            }
+            else
+                return;
+
+            step.Items.Clear();
+            step.Items.Add("- Select -");
+            foreach (string file in allLines)
+            {
+                step.Items.Add(file);
+            }
+            F_steps = openFileDialog.FileName;
+        }
+
+        // parametrage du fichier des etapes
+        private void set_round_File(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            string[] allLines;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                allLines = File.ReadAllLines(openFileDialog.FileName);
+            }
+            else
+                return;
+
+            round.Items.Clear();
+            round.Items.Add("- Select -");
+            foreach (string file in allLines)
+            {
+                round.Items.Add(file);
+            }
+            F_round = openFileDialog.FileName;
+        }
+
+        private void openBack()
+        {
+            var allLines = File.ReadAllLines(F_ppl);
+
+            fileparsed.Items.Clear();
+            fileparsed.Items.Add("- Select -");
+            foreach (string file in allLines)
+            {
+                fileparsed.Items.Add(file);
+            }
+
+            allLines = File.ReadAllLines(F_steps);
+
+            step.Items.Clear();
+            step.Items.Add("- Select -");
+            foreach (string file in allLines)
+            {
+                step.Items.Add(file);
+            }
+
+            allLines = File.ReadAllLines(F_round);
+
+            round.Items.Clear();
+            round.Items.Add("- Select -");
+            foreach (string file in allLines)
+            {
+                round.Items.Add(file);
+            }
         }
 
         //recupere le nombre de voie maximum sur une personne

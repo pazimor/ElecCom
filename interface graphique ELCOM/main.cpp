@@ -43,6 +43,7 @@ int main()
 		window->clear(sf::Color(255, 255, 255, 255));
 		proto.update();
 
+		graph->getfiles(proto.files.at(0), proto.files.at(1));
 		graph->addppl();
 		
 		// sort and cut max ppl number

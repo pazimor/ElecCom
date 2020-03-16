@@ -8,6 +8,7 @@ class Protocole
 {
 public :
 	std::string content;
+	std::vector<std::string> files;
 	std::shared_ptr<Graph> graph;
 
 public :
@@ -15,7 +16,7 @@ public :
 	Protocole(std::shared_ptr<Graph>);
 	~Protocole();
 
-	void readFile(const char* filePath);
+	std::string readFile(const char* filePath);
 	void update();
 };
 

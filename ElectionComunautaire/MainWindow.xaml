@@ -31,8 +31,8 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_People Listing File" Click="set_File"/>
-                    <MenuItem Header="_Steps File" />
-                    <MenuItem Header="_Round File" />
+                    <MenuItem Header="_Steps File" Click="set_step_File"/>
+                    <MenuItem Header="_Round File" Click="set_round_File"/>
                 </MenuItem>
                 <MenuItem Header="_Save">
                     <MenuItem Header="_Capture" Click="screenshot" InputGestureText="Ctrl-S"/>
@@ -73,25 +73,8 @@
         </StackPanel>
 
         <ComboBox x:Name="step" Grid.Column="2" Grid.Row="1" Margin="5,5,5,5" MinWidth="120" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="step_SelectionChanged" SelectedIndex="0">
-            <ComboBoxItem Content="Sélectionner" HorizontalAlignment="Center"/>
-            <ComboBoxItem Content="élection du Président"/>
-            <ComboBoxItem Content="élection du 1er Vice Président"/>
-            <ComboBoxItem Content="élection du 2nd Vice Président"/>
-            <ComboBoxItem Content="élection du 3ème Vice Président"/>
-            <ComboBoxItem Content="élection du 4ème Vice Président"/>
-            <ComboBoxItem Content="élection du 5ème Vice Président"/>
-            <ComboBoxItem Content="élection du 6ème Vice Président"/>
-            <ComboBoxItem Content="élection du 7ème Vice Président"/>
-            <ComboBoxItem Content="élection du 8ème Vice Président"/>
-            <ComboBoxItem Content="élection du 9ème Vice Président"/>
-            <ComboBoxItem Content="élection du 10ème Vice Président"/>
         </ComboBox>
         <ComboBox x:Name="round" Grid.Column="2"  Grid.Row="2" Margin="5,5,5,5" MinWidth="120" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="step_SelectionChanged" SelectedIndex="0">
-            <ComboBoxItem Content="Sélectionner" HorizontalAlignment="Center"/>
-            <ComboBoxItem Content="1er Tour"/>
-            <ComboBoxItem Content="2ème Tour"/>
-            <ComboBoxItem Content="3ème Tour"/>
-
         </ComboBox>
         <Grid  Grid.Column="0" Grid.ColumnSpan="6"  Grid.Row="4" x:Name="vnull"/>
         <Grid  Grid.Column="0" Grid.ColumnSpan="6"  Grid.Row="5" x:Name="vblank"/>

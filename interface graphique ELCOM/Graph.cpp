@@ -39,6 +39,28 @@ Graph::~Graph()
 {
 }
 
+void Graph::getfiles(std::string Steps, std::string Round)
+{
+	//need to work on it
+
+	{
+		char* next = NULL;
+		auto token = strtok_s((char*)Steps.c_str(), "\n", &next);
+		while (token != NULL) {
+			_Ssteps.push_back(token);
+			token = strtok_s(NULL, "\n", &next);
+		}
+	}
+	{
+		char* next = NULL;
+		auto token = strtok_s((char*)Round.c_str(), "\n", &next);
+		while (token != NULL) {
+			_Srounds.push_back(token);
+			token = strtok_s(NULL, "\n", &next);
+		}
+	}
+}
+
 //chargement de la police d'ecriture
 bool Graph::setDefaultFont(std::string fontName)
 {
@@ -53,13 +75,13 @@ bool Graph::setDefaultFont(std::string fontName)
 bool Graph::setupSR()
 {
 	W_Steps.setFont(Defaultfont);
-	W_Steps.setString(_Ssteps[0]);
+	W_Steps.setString(" ");
 	W_Steps.setCharacterSize(75);
 	W_Steps.setFillColor(sf::Color::White);
 	W_Steps.setPosition(800, 90);
 
 	W_Rounds.setFont(Defaultfont);
-	W_Rounds.setString(_Srounds[0]);
+	W_Rounds.setString(" ");
 	W_Rounds.setCharacterSize(75);
 	W_Rounds.setFillColor(sf::Color::White);
 	W_Rounds.setPosition(Height - Height / 8.f, 75);
@@ -70,15 +92,24 @@ bool Graph::setupSR()
 	W_NbEnveloppe.setFillColor(sf::Color(135, 16, 67));
 	sf::FloatRect WenveloppeSize = W_NbEnveloppe.getGlobalBounds();
 	W_NbEnveloppe.setOrigin(WenveloppeSize.width, 0);
-	W_NbEnveloppe.setPosition(Height - 100, Width - Width / 4.f + 70);
+	W_NbEnveloppe.setPosition(Height - 100, Width - (Width / 4.f) + 70);
 
-	W_nbNullblanc.setFont(Defaultfont);
-	W_nbNullblanc.setString("Nombre de bulletins blancs ou nuls 00");
-	W_nbNullblanc.setCharacterSize(45);
-	W_nbNullblanc.setFillColor(sf::Color(135, 16, 67));
-	sf::FloatRect WnullblancSize = W_nbNullblanc.getGlobalBounds();
-	W_nbNullblanc.setOrigin(WnullblancSize.width, 0);
-	W_nbNullblanc.setPosition(Height - 100, Width - Width / 4.f + 120);
+	W_nbNull.setFont(Defaultfont);
+	W_nbNull.setString("Nombre de bulletins blancs 00");
+	W_nbNull.setCharacterSize(45);
+	W_nbNull.setFillColor(sf::Color(135, 16, 67));
+	sf::FloatRect WnullSize = W_nbNull.getGlobalBounds();
+	W_nbNull.setOrigin(WnullSize.width, 0);
+	W_nbNull.setPosition(Height - 20, Width - (Width / 4.f) + 120);
+
+	W_nbBlank.setFont(Defaultfont);
+	W_nbBlank.setString("Nombre de bulletins nuls 00");
+	W_nbBlank.setCharacterSize(45);
+	W_nbBlank.setFillColor(sf::Color(135, 16, 67));
+	sf::FloatRect WBlankSize = W_nbBlank.getGlobalBounds();
+	W_nbBlank.setOrigin(WBlankSize.width, 0);
+	W_nbBlank.setPosition(Height - 125, Width - (Width / 4.f) + 170);
+
 
 	W_suffrage.setFont(Defaultfont);
 	W_suffrage.setString("Suffrages exprimés 00");
@@ -86,7 +117,7 @@ bool Graph::setupSR()
 	W_suffrage.setFillColor(sf::Color(135, 16, 67));
 	sf::FloatRect WsuffrageSize = W_suffrage.getGlobalBounds();
 	W_suffrage.setOrigin(WsuffrageSize.width, 0);
-	W_suffrage.setPosition(Height - Height / 2 - 300, Width - Width / 4.f + 70);
+	W_suffrage.setPosition(Height - Height / 2 - 300, Width - (Width / 4.f) + 70);
 
 	W_Majo.setFont(Defaultfont);
 	W_Majo.setString("Majorité absolue 00");
@@ -94,7 +125,7 @@ bool Graph::setupSR()
 	W_Majo.setFillColor(sf::Color(135, 16, 67));
 	sf::FloatRect WMajoSize = W_Majo.getGlobalBounds();
 	W_Majo.setOrigin(WMajoSize.width, 0);
-	W_Majo.setPosition(Height - Height / 2 - 300, Width - Width / 4.f + 120);
+	W_Majo.setPosition(Height - Height / 2 - 300, Width - (Width / 4.f) + 120);
 
 	return true;
 }
@@ -123,20 +154,23 @@ void Graph::update()
 	//draw word
 	sf::FloatRect WstepSize = W_Steps.getGlobalBounds();
 	W_Steps.setOrigin(WstepSize.width / 2.f, WstepSize.height / 2.f);
-	W_Steps.setString(_Ssteps[data[0]]);
+	W_Steps.setString(data[0] - 1 >= 0 ? _Ssteps.at(data[0] - 1) : " ");
 	win->draw(W_Steps);
 
 	sf::FloatRect WRoundSize = W_Rounds.getGlobalBounds();
 	W_Rounds.setOrigin(WRoundSize.width / 2.f, WRoundSize.height / 2.f);
-	W_Rounds.setString(_Srounds[data[1]]);
+	W_Rounds.setString(data[1] - 1 >= 0 ? _Srounds.at(data[1] - 1) : " ");
 	win->draw(W_Rounds);
 
-	W_NbEnveloppe.setString("Nombre d'enveloppes dans l'urne " + std::to_string(data[3]));
+	W_NbEnveloppe.setString("Nombre d'enveloppes dans l'urne " + std::to_string(data[2]));
 	win->draw(W_NbEnveloppe);
-	W_nbNullblanc.setString("Nombre de bulletins blancs ou nuls " + std::to_string(data[4]));
-	win->draw(W_nbNullblanc);
+	W_nbNull.setString("Nombre de bulletins nuls " + std::to_string(data[4]));
+	win->draw(W_nbNull);
+	W_nbBlank.setString("Nombre de bulletins blancs " + std::to_string(data[3]));
+	win->draw(W_nbBlank);
 	W_suffrage.setString("Suffrages exprimés " + std::to_string(data[5]));
 	win->draw(W_suffrage);
+
 	if (std::to_string(data[1]).at(0) == '3')
 		W_Majo.setString("Majorité relative " + std::to_string(data[6]));
 	else

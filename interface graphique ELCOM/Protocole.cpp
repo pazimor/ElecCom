@@ -17,28 +17,31 @@ Protocole::~Protocole()
 }
 
 // lecture
-void Protocole::readFile(const char* filePath) {
+std::string Protocole::readFile(const char* filePath) {
 	
 	std::ifstream fileStream(filePath, std::ios::in);
 
+	std::string content;
+
 	if (!fileStream.is_open()) {
 		std::cerr << "Could not read file " << filePath << ". File does not exist." << std::endl;
-		return ;
+		return NULL;
 	}
 
 	std::string line = "";
 	while (!fileStream.eof()) {
 		std::getline(fileStream, line);
-		content = line;
+		content += line + "\n";
 	}
 
 	fileStream.close();
+	return content;
 }
 
 // mise a jour des informations
 void Protocole::update()
 {
-	readFile("c:/temp/IPC.ipc");
+	content = readFile("c:/temp/IPC.ipc");
 	
 	char* token = NULL;
 	char* next = NULL;
@@ -48,9 +51,12 @@ void Protocole::update()
 	token = strtok_s((char*)content.c_str(), ";", &next);
 
 	graph->datappl.clear();
+	static bool first = true;
+
 	while (token != NULL) {
-		if (i < 3)
+		if (i < 3 && first)
 		{
+			files.push_back(readFile(token));
 			//path
 		}
 		if (i >= 3 && i < 5)
@@ -87,5 +93,8 @@ void Protocole::update()
 
 		// update graphics (set values)
 	}
+	files;
+	graph->data;
+	first = false;
 }
 

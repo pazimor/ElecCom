@@ -22,22 +22,8 @@ struct pplData {
 
 class Graph
 {
-	const char* _Ssteps[15] = {"", "ÉLECTION DU PRÉSIDENT",
-							"ÉLECTION DU 1er VICE-PRÉSIDENT",
-							"ÉLECTION DU 2e VICE-PRÉSIDENT",
-							"ÉLECTION DU 3e VICE-PRÉSIDENT",
-							"ÉLECTION DU 4e VICE-PRÉSIDENT",
-							"ÉLECTION DU 5e VICE-PRÉSIDENT",
-							"ÉLECTION DU 6e VICE-PRÉSIDENT",
-							"ÉLECTION DU 7e VICE-PRÉSIDENT",
-							"ÉLECTION DU 8e VICE-PRÉSIDENT",
-							"ÉLECTION DU 9e VICE-PRÉSIDENT",
-							"ÉLECTION DU 10e VICE-PRÉSIDENT",
-							"ÉLECTION DU 11e VICE-PRÉSIDENT",
-							"ÉLECTION DU 12e VICE-PRÉSIDENT",
-							"ÉLECTION DU 13e VICE-PRÉSIDENT"};
-	 
-	const char* _Srounds[4] = { "", "1er TOUR", "2e TOUR", "3e TOUR" };
+	std::vector<std::string> _Ssteps;
+	std::vector<std::string> _Srounds;
 
 	std::shared_ptr<sf::RenderWindow> win;
 
@@ -47,7 +33,8 @@ class Graph
 	sf::Text W_Steps;
 	sf::Text W_Rounds;
 	sf::Text W_NbEnveloppe;
-	sf::Text W_nbNullblanc;
+	sf::Text W_nbNull;
+	sf::Text W_nbBlank;
 	sf::Text W_suffrage;
 	sf::Text W_Majo;
 	/* rects */
@@ -67,7 +54,7 @@ class Graph
 	bool logoLoaded;
 public: 
 	std::vector<PeopleContain> pplList;
-	int data[7];
+	int data[10];
 	std::vector<pplData> datappl;
 
 public :
@@ -75,6 +62,7 @@ public :
 	Graph();
 	~Graph();
 
+	void getfiles(std::string, std::string);
 	bool setDefaultFont(std::string);
 	bool setupSR(); // setup steps | rounds
 	void setupBackGround();
