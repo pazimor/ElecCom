@@ -257,7 +257,7 @@ namespace ElectionComunautaire
             sufrage.Content = TotalVotes.ToString();
 
             //generation du protocole
-            string protocole = step.SelectedIndex.ToString() + ";" + round.SelectedIndex.ToString() + ";" +
+            string protocole = " " + ";" + " " + ";" + " " + ";" + step.SelectedIndex.ToString() + ";" + round.SelectedIndex.ToString() + ";" +
                                People.Count.ToString() + ";";
 
             //generation du protocole (envoye des personnes)
@@ -271,11 +271,11 @@ namespace ElectionComunautaire
             //generation du protocole (envoye des donnee complementaires)
             string endProtocole;
             if (round.SelectedIndex.ToString()[0] == '3')
-                endProtocole = nbr_buletinI.ToString() + ";" + (Vblank.nbVotesI + Vnull.nbVotesI).ToString() + ";" + TotalVotes + ";" + GetMaxVoice();
+                endProtocole = nbr_buletinI.ToString() + ";" + Vblank.nbVotesI.ToString() + ";" + Vnull.nbVotesI.ToString() + ";" + TotalVotes + ";" + GetMaxVoice();
             else
-                endProtocole = nbr_buletinI.ToString() + ";" + (Vblank.nbVotesI + Vnull.nbVotesI).ToString() + ";" + TotalVotes + ";" + majo.Content.ToString();
+                endProtocole = nbr_buletinI.ToString() + ";" + Vblank.nbVotesI.ToString() + ";" + Vnull.nbVotesI.ToString() + ";" + TotalVotes + ";" + majo.Content.ToString();
 
-            protocole = protocole + pplProtocole + endProtocole;
+            protocole = protocole + endProtocole + pplProtocole;
 
             // envoy le protocole
             System.IO.File.WriteAllText(path, protocole, Encoding.GetEncoding(28591));
@@ -332,7 +332,7 @@ namespace ElectionComunautaire
                 fileparsed.Items.Add(file);
             }
             string[] data = openFileDialog.FileName.Split('\\');
-            fileTitle.Content = data[data.Length - 1];
+            //fileTitle.Content = data[data.Length - 1];
         }
 
         //recupere le nombre de voie maximum sur une personne

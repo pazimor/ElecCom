@@ -49,20 +49,27 @@ void Protocole::update()
 
 	graph->datappl.clear();
 	while (token != NULL) {
-		if (i < 2)
+		if (i < 3)
 		{
-			graph->data[i] = std::stoi(token);
+			//path
 		}
-		else if (i == 2)
+		if (i >= 3 && i < 5)
 		{
-			nextdata = (3 * std::stoi(token)) + 3;
+			//step Round
+			graph->data[i - 3] = std::stoi(token);
 		}
-		else if (i >= nextdata)
+		else if (i == 5)
 		{
-			graph->data[i - nextdata + 3] = std::stoi(token);
+			// compute end O_o`
+			nextdata = (3 * std::stoi(token)) + 5;
 		}
-		else
+		else if (i >= 5 && i < 11)
 		{
+			graph->data[i - 4] = std::stoi(token);
+		}
+		else if (i >= 11)
+		{
+			// for ppl
 			if (token != "")
 			{
 				pplData tmp;

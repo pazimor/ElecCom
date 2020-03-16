@@ -152,7 +152,7 @@ namespace ElectionComunautaire
         // appeler pour la generation du protocole
         public string Protocole()
         {
-            string ret = name + ";" + percent.Text + ";" + nbVotes.Text + ";";
+            string ret = ";" + name + ";" + percent.Text + ";" + nbVotes.Text;
             return ret;
         }
     }
