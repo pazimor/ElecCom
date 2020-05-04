@@ -25,7 +25,7 @@ std::string Protocole::readFile(const char* filePath) {
 
 	if (!fileStream.is_open()) {
 		std::cerr << "Could not read file " << filePath << ". File does not exist." << std::endl;
-		return NULL;
+		return content;
 	}
 
 	std::string line = "";
@@ -57,15 +57,17 @@ void Protocole::update()
 		if (i < 3 && first)
 		{
 			auto tmp = readFile(token);
-			if (tmp.c_str() != NULL)
-				files.push_back(tmp);
-			else
+			if (tmp.empty())
 				files.push_back("NONE");
+			else
+				files.push_back(tmp);
 		}
 		if (i >= 3 && i < 5)
 		{
-			//step Round
-			graph->data[i - 3] = std::stoi(token);
+			if (files.at(i - 2).empty())
+				graph->data[i - 2] = 1;
+			else
+			graph->data[i - 2] = std::stoi(token);
 		}
 		else if (i == 5)
 		{

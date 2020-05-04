@@ -35,9 +35,9 @@ namespace ElectionComunautaire
         const string Blank = "Votes blancs";
         const string Nulle = "Votes nuls";
 
-        private string F_ppl;
-        private string F_steps;
-        private string F_round;
+        private string F_ppl = " ";
+        private string F_steps = " ";
+        private string F_round = " ";
 
         // initialisation de debut
         public MainWindow()
