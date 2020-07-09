@@ -39,7 +39,7 @@ Graph::~Graph()
 {
 }
 
-void Graph::getfiles(std::string Steps, std::string Round)
+void Graph::getfiles(std::string Round, std::string Steps)
 {
 	//need to work on it
 
@@ -154,10 +154,10 @@ void Graph::update()
 	//draw word
 	sf::FloatRect WstepSize = W_Steps.getGlobalBounds();
 	W_Steps.setOrigin(WstepSize.width / 2.f, WstepSize.height / 2.f);
-	if (data[0] - 1 > _Ssteps.size())
+	if (data[1] - 1 > _Ssteps.size())
 		W_Steps.setString(_Ssteps.at(_Ssteps.size()- 1));
 	else
-		W_Steps.setString(data[0] - 1 >= 0 ? _Ssteps.at(data[0] - 1) : " ");
+		W_Steps.setString(data[1] - 1 >= 0 ? _Ssteps.at(data[1] - 1) : " ");
 	win->draw(W_Steps);
 
 	sf::FloatRect WRoundSize = W_Rounds.getGlobalBounds();
@@ -165,7 +165,7 @@ void Graph::update()
 	if (data[0] - 1 > _Srounds.size())
 		W_Steps.setString(_Srounds.at(_Srounds.size() - 1));
 	else
-	W_Rounds.setString(data[1] - 1 >= 0 ? _Srounds.at(data[1] - 1) : " ");
+		W_Rounds.setString(data[0] - 1 >= 0 ? _Srounds.at(data[0] - 1) : " ");
 	win->draw(W_Rounds);
 
 	W_NbEnveloppe.setString("Nombre d'enveloppes dans l'urne " + std::to_string(data[2]));
@@ -177,10 +177,10 @@ void Graph::update()
 	W_suffrage.setString("Suffrages exprimés " + std::to_string(data[5]));
 	win->draw(W_suffrage);
 
-	if (std::to_string(data[1]).at(0) == '3')
-		W_Majo.setString("Majorité relative " + std::to_string(data[6]));
-	else
+	if (data[1] != 3)
 		W_Majo.setString("Majorité absolue " + std::to_string(data[6]));
+	else
+		W_Majo.setString(" ");
 	win->draw(W_Majo);
 
 	// sprite

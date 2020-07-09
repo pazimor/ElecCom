@@ -64,10 +64,10 @@ void Protocole::update()
 		}
 		if (i >= 3 && i < 5)
 		{
-			if (files.at(i - 2).empty())
+			if (files.at(i - 3).empty())
 				graph->data[i - 2] = 1;
 			else
-			graph->data[i - 2] = std::stoi(token);
+			graph->data[i - 3] = std::stoi(token);
 		}
 		else if (i == 5)
 		{
