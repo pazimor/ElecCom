@@ -293,7 +293,7 @@ namespace ElectionComunautaire
             protocole = protocole + endProtocole + pplProtocole;
 
             // envoy le protocole
-            System.IO.File.WriteAllText(path, protocole, Encoding.GetEncoding(28591));
+            System.IO.File.WriteAllText(path, protocole, Encoding.GetEncoding(874));
 
         }
 
