@@ -231,6 +231,9 @@ namespace ElectionComunautaire
             if (!Vnull.checkedflag)
                 TotalVotes += Vnull.getNbVotes();
 
+            int majority = (TotalVotes / 2) + 1;
+            majo.Content = majority.ToString();
+
             // update every personne TotalVotes is used to compute a percent  
             People.ForEach(delegate (Page1 personne)
             {
@@ -304,7 +307,17 @@ namespace ElectionComunautaire
                 majo.Content = 0;
             else
             {
-                int majority = (nbr_buletinI / 2) + 1;
+                var TotalVotes = 0;
+                People.ForEach(delegate (Page1 personne)
+                {
+                    if (!personne.checkedflag)
+                        TotalVotes += personne.getNbVotes();
+                });
+                if (!Vblank.checkedflag)
+                    TotalVotes += Vblank.getNbVotes();
+                if (!Vnull.checkedflag)
+                    TotalVotes += Vnull.getNbVotes();
+                int majority = (TotalVotes / 2) + 1;
                 majo.Content = majority.ToString();
             }
             update(@"c:\temp\IPC.ipc");
